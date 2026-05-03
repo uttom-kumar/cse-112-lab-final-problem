@@ -89,7 +89,7 @@ class ScientificCalculator : public CalculatorBase
 };
 
 // Legacy Calculator
-class LegacyCalculator : public ScientificCalculator
+class LegacyCalculator : public CalculatorBase
 {
     public:
     double add(double num1, double num2)
@@ -384,7 +384,7 @@ int main()
                     }
                     if (num2 == 0)
                     {
-                        throw "wrongInput";
+                        throw "divideByZero" ;
                     }
                     // ScientificCalculator calculator;
                     double result = calculator.div(num1, num2);
@@ -398,9 +398,9 @@ int main()
                 {
                     cout << "Error : Only accept Number " << endl;
                 }
-                if ( msg == "wrongInput")
+                if (msg == "divideByZero")
                 {
-                    cout  << "Error : Wrong input" << endl;
+                    cout << "Error : Division by zero is not allowed." << endl;
                 }
             }
         }
