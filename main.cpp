@@ -24,21 +24,49 @@ class CalculatorBase
 class ScientificCalculator : public CalculatorBase
 {
     public:
-    double add(double num1, double num2)
+    double add(double arr[], int n)
     {
-        return num1 + num2;
+        double sum = 0;
+
+        for(int i = 0; i < n; i++)
+        {
+            sum = sum + arr[i];
+        }
+
+        return sum;
     }
-    double sub(double num1, double num2)
+    double sub(double arr[], int n)
     {
-        return num1 - num2;
+        double result = arr[0];
+
+        for(int i = 1; i < n; i++)
+        {
+            result = result - arr[i];
+        }
+
+        return result;
     }
-    double mul(double num1, double num2)
+    double mul(double arr[], int n)
     {
-        return num1 * num2;
+        double result = 1;
+
+        for(int i = 0; i < n; i++)
+        {
+            result = result * arr[i];
+        }
+
+        return result;
     }
-    double div(double num1, double num2)
+    double div(double arr[], int n)
     {
-        return num1 / num2;
+        double result = arr[0];
+
+        for(int i = 1; i < n; i++)
+        {
+            result = result / arr[i];
+        }
+
+        return result;
     }
 
     double square(double num1)
@@ -115,10 +143,10 @@ int main()
         if (calMode == 1)
         {
             cout << "Choose your option" << endl;
-            cout << "Type 1. Add" << endl;
-            cout << "Type 2. Subtract" << endl;
-            cout << "Type 3. Multiply" << endl;
-            cout << "Type 4. Divide" << endl;
+            cout << "Type 1. Addition Series" << endl;
+            cout << "Type 2. Subtract Series" << endl;
+            cout << "Type 3. Multiply Series" << endl;
+            cout << "Type 4. Divide Series" << endl;
             cout << "Type 5. Square" << endl;
             cout << "Type 6. Cube" << endl;
             cout << "Type 7. Square Root" << endl;
@@ -126,56 +154,85 @@ int main()
 
             try
             {
+                int n;
                 cin >> choiceMethod;
 
                 if (choiceMethod == 1)
                 {
-                    cout << "Enter two value : " ;
-                    cin >> num1 >> num2;
+                    cout << "How many numbers do you want to enter? : ";
+                    cin >> n;
+                    double arr[n];
+                    cout << "\nEnter " << n << " interger numbers one by one:" << endl;
+                    for(int i = 0; i < n; i++)
+                    {
+                        cout << "Enter number " << i + 1 << " : ";
+                        cin >> arr[i];
+                    }
                     if (cin.fail())
                     {
                         throw "onlyNumber";
                     }
-                    double result = calculator.add(num1, num2);
-                    calculator.ShowDisplay("Addition", result);
+                    double result = calculator.add(arr,  n);
+                    calculator.ShowDisplay("Addition Series = ", result);
                 }
                 else if (choiceMethod == 2)
                 {
-                    cout << "Enter two value : " ;
-                    cin >> num1 >> num2;
+                    cout << "How many numbers do you want to enter? : ";
+                    cin >> n;
+                    double arr[n];
+                    cout << "\nEnter " << n << " integer numbers one by one:" << endl;
+                    for(int i = 0; i < n; i++)
+                    {
+                        cout << "Enter number " << i + 1 << " : ";
+                        cin >> arr[i];
+                    }
                     if (cin.fail())
                     {
                         throw "onlyNumber";
                     }
-                    double result = calculator.sub(num1, num2);
+                    double result = calculator.sub(arr, n);
                     calculator.ShowDisplay("Substraction", result);
                 }
                 else if (choiceMethod == 3)
                 {
-                    cout << "Enter two value : " ;
-                    cin >> num1 >> num2;
+                    cout << "How many numbers do you want to enter? : ";
+                    cin >> n;
+                    double arr[n];
+                    cout << "\nEnter " << n << " integer numbers one by one:" << endl;
+                    for(int i = 0; i < n; i++)
+                    {
+                        cout << "Enter number " << i + 1 << " : ";
+                        cin >> arr[i];
+                    }
                     if (cin.fail())
                     {
                         throw "onlyNumber";
                     }
-                    double result = calculator.mul(num1, num2);
+                    double result = calculator.mul(arr, n);
                     calculator.ShowDisplay("Multiplication", result);
                 }
 
                 else if (choiceMethod == 4)
                 {
-                    cout << "Enter two value : " ;
-                    cin >> num1 >> num2;
+                    cout << "How many numbers do you want to enter? : ";
+                    cin >> n;
+                    double arr[n];
+                    cout << "\nEnter " << n << " integer numbers one by one:" << endl;
+                    for(int i = 0; i < n; i++)
+                    {
+                        cout << "Enter number " << i + 1 << " : ";
+                        cin >> arr[i];
+                    }
                     if (cin.fail())
                     {
                         throw "onlyNumber";
                     }
-                    if (num2 == 0)
+                    if(n <= 0)
                     {
-                        throw "wrongInput";
+                        throw "invalidSize";
                     }
                     // ScientificCalculator calculator;
-                    double result = calculator.div(num1, num2);
+                    double result = calculator.div(arr, n);
                     calculator.ShowDisplay("Division", result);
                 }
 
@@ -236,23 +293,37 @@ int main()
             {
                 if (msg == "inValidMethod")
                 {
-                    cout << "Invalid choice your method! please try again" << endl;
+                    cout << "Error : Invalid choice! Please select a valid menu option." << endl;
                 }
+
                 if (msg == "onlyNumber")
                 {
-                    cout << "Only accept Number " << endl;
+                    cout << "Error : Invalid input! Please enter numbers only." << endl;
                 }
-                if ( msg == "wrongInput")
+
+                if (msg == "wrongInput")
                 {
-                    cout  << "Wrong input" << endl;
+                    cout << "Error : Wrong input! Division by zero is not allowed." << endl;
                 }
+
+                if (msg == "invalidSize")
+                {
+                    cout << "Error : Invalid input size! Number of elements must be greater than 0." << endl;
+                }
+
+                if (msg == "divideByZero")
+                {
+                    cout << "Error : Error! You cannot divide by zero in a series." << endl;
+                }
+
                 if (msg == "errorRoot")
                 {
-                    cout << "Error " << endl;
+                    cout << "Error: Invalid input! Square root requires a positive number." << endl;
                 }
+
                 if (msg == "onlyPositiveNumber")
                 {
-                    cout << "Only positive number " << endl;
+                    cout << "Error : Invalid input! Please enter a positive number only." << endl;
                 }
             }
         }
@@ -325,11 +396,11 @@ int main()
             {
                 if (msg == "onlyNumber")
                 {
-                    cout << "Only accept Number " << endl;
+                    cout << "Error : Only accept Number " << endl;
                 }
                 if ( msg == "wrongInput")
                 {
-                    cout  << "Wrong input" << endl;
+                    cout  << "Error : Wrong input" << endl;
                 }
             }
         }
@@ -342,7 +413,7 @@ int main()
     {
         if (msg == "inValidCalculator")
         {
-            cout << "Invalid Calculator" << endl;
+            cout << "Error : Invalid Calculator" << endl;
         }
     }
 
